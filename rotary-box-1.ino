@@ -1,3 +1,4 @@
+#include <Wire.h>
 #include <Adafruit_MCP23017.h>
 
 #include <Joystick.h>
@@ -5,6 +6,8 @@
 
 //https://github.com/MHeironimus/ArduinoJoystickLibrary
 Joystick_ Joystick(0x04, 0x05, 12, 0, false, false, false, false, false, false, false, false, false, false, false);
+//https://www.nikolaus-lueneburg.de/2015/11/mcp23017-i2c-io-port-expander/
+Adafruit_MCP23017 mcp1;
 
 void encoderChange(int8_t change, int8_t decreaseButton, int8_t increaseButton) {
   if (change == -1) {
@@ -19,7 +22,7 @@ void encoderChange(int8_t change, int8_t decreaseButton, int8_t increaseButton) 
 }
 
 // DT, CLK
-MyEncoder encoder1 (2, 3, [] (int8_t c) {
+MyEncoder encoder1 (18, 19, [] (int8_t c) {
   encoderChange(c, 0, 1);
 });
 MyEncoder encoder2 (4, 5, [] (int8_t c) {
@@ -40,6 +43,7 @@ MyEncoder encoder6 (14, 15, [] (int8_t c) {
 
 void setup() {
   Serial.begin(9600);
+  mcp1.begin();
   Joystick.begin();
 }
 
