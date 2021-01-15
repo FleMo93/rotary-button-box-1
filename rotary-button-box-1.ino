@@ -12,11 +12,11 @@ Adafruit_MCP23017 mcp1;
 
 void encoderChange(int8_t change, int8_t decreaseButton, int8_t increaseButton) {
   if (change == -1) {
-    Serial.println("decreased");
+    //Serial.println("decreased");
     Joystick.setButton(decreaseButton, 1);
     Joystick.setButton(decreaseButton, 0);
   } else {
-    Serial.println("increased");
+    //Serial.println("increased");
     Joystick.setButton(increaseButton, 1);
     Joystick.setButton(increaseButton, 0);
   }
@@ -25,10 +25,10 @@ void encoderChange(int8_t change, int8_t decreaseButton, int8_t increaseButton) 
 void buttonChange(int8_t buttonNumber, bool change) {
   if (change) {
     Joystick.setButton(buttonNumber, 1);
-    Serial.println("button down");
+    //Serial.println("button down");
   } else {
     Joystick.setButton(buttonNumber, 0);
-    Serial.println("button up");
+    //Serial.println("button up");
   }
 }
 
@@ -123,10 +123,10 @@ void setup() {
 void loopEncoder() {
   encoder1.read();
   encoder2.read();
-  encoder3.read();
-  encoder4.read();
-  encoder5.read();
-  encoder6.read();
+  //encoder3.read();
+  //encoder4.read();
+  //encoder5.read();
+  //encoder6.read();
 }
 
 
@@ -147,9 +147,9 @@ void loopButtonArray() {
       mcp1.pullUp(rowCol, HIGH);
 
       if (mcp1.digitalRead(rowCol) == LOW) {
-        Serial.print("1");
+        //Serial.print("1");
       } else {
-        Serial.print("0");
+        //Serial.print("0");
       }
 
       mcp1.pullUp(rowCol, LOW);
@@ -157,11 +157,11 @@ void loopButtonArray() {
 
     mcp1.pinMode(curCol, INPUT);
   }
-  Serial.println("");
+  //Serial.println("");
 }
 
 void loop() {
   loopEncoder();
   loopEncoderButtons();
-  loopButtonArray();
+  //loopButtonArray();
 }

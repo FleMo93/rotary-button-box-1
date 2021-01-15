@@ -1,4 +1,6 @@
+#define ENCODER_OPTIMIZE_INTERRUPTS
 #include <Arduino.h>
+//https://www.pjrc.com/teensy/td_libs_Encoder.html
 #include <Encoder.h>
 #include "MyEncoder.h"
 
@@ -16,6 +18,7 @@ MyEncoder::MyEncoder(
 void MyEncoder::read()
 {
   long newPosition = _encoder.read();
+  //Serial.println(newPosition);
 
   if (newPosition == _position || (newPosition - _defaultPosition) % 4 != 0) {
     return;
